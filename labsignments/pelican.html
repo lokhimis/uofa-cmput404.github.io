@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <title>CMPUT 404 - Pelican Lab</title>
+      <meta charset="utf-8" />
+      <meta name="generator" content="Pelican" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Web Applications and Architecture" />
+
+  <link rel="icon" href="../theme/favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="../theme/style.css" />
+  <link rel="stylesheet" type="text/css" href="../theme/404.css" />
+
+
+
+
+    <meta name="tags" content="labs" />
+
+  </head>
+
+  <body>
+    <header>
+      <hgroup><h1><a href="../">CMPUT 404</a></h1><p>Web Applications and Architecture</p></hgroup>
+      <nav><ul>
+          <li><a href="/general/outline.html">Outline</a></li>
+          <li><a href="/#eclass">eClass & Grades</a></li>
+          <li><a href="/#schedule">Schedule</a></li>
+          <li><a href="/general/labs.html">Labs</a></li>
+          <li><a href="/general/project.html">Project</a></li>
+          <li><a href="/general/individual.html">Participation</a></li>
+          <li><a href="/general/resources.html">Resources</a></li>
+          <li><a href="/general/help.html#discussion-forum">Discussion Forum</a></li>
+          <li><a href="/#news-notices">News & Notices</a></li>
+          <li><a href="/#lecture-zoom">Lecture Zoom</a></li>
+          <li><a href="https://uofa-cmput404.github.io/slides-xt/">Slides</a></li>
+          <li><a href="/general/help.html">Help</a></li>
+      </ul></nav>
+    </header>
+    <main>
+  <article>
+    <header>
+      <h2>
+        <a href="../labsignments/pelican.html" rel="bookmark"
+           title="Permalink to Pelican Lab">Pelican Lab</a></h2>
+      
+    </header>
+    <div class="toc">
+<ul>
+<li><a href="#description">Description</a></li>
+<li><a href="#getting-started">Getting Started</a></li>
+<li><a href="#lab-instructions">Lab Instructions</a><ul>
+<li><a href="#phase-one-simple-pelican-site">Phase One: Simple Pelican Site</a><ul>
+<li><a href="#create-your-first-article">Create your first Article</a></li>
+<li><a href="#enable-custom-themes-for-your-site">Enable Custom Themes for your Site</a></li>
+<li><a href="#generate-and-preview-your-site">Generate and preview your site</a><ul>
+<li><a href="#for-mac-and-ubuntu">For Mac And Ubuntu:</a></li>
+<li><a href="#for-windows">For Windows:</a></li>
+<li><a href="#for-ubuntu-on-windows-wsl">For Ubuntu on Windows (WSL):</a></li>
+</ul>
+</li>
+<li><a href="#prepare-your-pelican-site-for-github-pages">Prepare your Pelican Site for GitHub Pages</a></li>
+<li><a href="#enable-github-pages-on-github">Enable GitHub Pages on GitHub</a><ul>
+<li><a href="#deploy-from-macos-or-ubuntu">Deploy from macOS or Ubuntu</a></li>
+<li><a href="#deploy-from-windows-or-without-make">Deploy from Windows or Without Make</a></li>
+</ul>
+</li>
+<li><a href="#check-your-github-pages-site">Check your GitHub Pages site</a></li>
+</ul>
+</li>
+<li><a href="#phase-two-add-content-to-your-site">Phase Two: Add content to your site</a></li>
+<li><a href="#phase-three-playing-around-with-css">Phase Three: Playing around with CSS</a><ul>
+<li><a href="#css-requirements">CSS Requirements</a></li>
+<li><a href="#testing-it-on-the-browser">Testing it on the Browser</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#tips-tricks">Tips &amp; Tricks</a><ul>
+<li><a href="#different-layouts-arise-from-different-user-experiences">Different layouts arise from different user experiences</a></li>
+<li><a href="#fancy-mode">Fancy Mode</a></li>
+<li><a href="#modify-the-html">Modify the HTML</a></li>
+<li><a href="#avoid-variations">Avoid Variations</a></li>
+<li><a href="#examples-from-past-cmput404-students">Examples from past Cmput404 students</a></li>
+</ul>
+</li>
+<li><a href="#restrictions">Restrictions</a></li>
+<li><a href="#recommendation">Recommendation</a></li>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#submission-instructions">Submission Instructions</a></li>
+<li><a href="#collaboration">Collaboration</a></li>
+</ul>
+</div>
+<h3 id="description">Description</h3>
+<p>The primary objective of this lab is for you to acquire the skills necessary to create a static page using <a href="https://blog.getpelican.com/">Pelican</a>, deploy it using <a href="https://pages.github.com/">GitHub pages</a>, and learn to customize the basic themes by experimenting with CSS styling.</p>
+<h3 id="getting-started">Getting Started</h3>
+<p>Clone the repository, change directory into the repo. Initialize a <code>python3</code> virtual environment.</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span><span class="o">{</span>git-repo-url<span class="o">}</span>
+<span class="nb">cd</span><span class="w"> </span><span class="o">{</span>git-clone-url<span class="o">}</span>
+virtualenv<span class="w"> </span>venv<span class="w"> </span>--python<span class="o">=</span>python3
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate
+</code></pre></div>
+
+<p>Install <code>pelican</code>, <code>markdown</code> and <code>ghp-import</code>.</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>pelican<span class="w"> </span>markdown<span class="w"> </span>ghp-import
+</code></pre></div>
+
+<p>Run the pelican quick-start. Make sure you answer <code>Y</code> when it asks you about GitHub Pages!</p>
+<div class="highlight"><pre><span></span><code>pelican-quickstart
+
+Welcome<span class="w"> </span>to<span class="w"> </span>pelican-quickstart<span class="w"> </span>v4.0.1.
+
+This<span class="w"> </span>script<span class="w"> </span>will<span class="w"> </span><span class="nb">help</span><span class="w"> </span>you<span class="w"> </span>create<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>Pelican-based<span class="w"> </span>website.
+
+Please<span class="w"> </span>answer<span class="w"> </span>the<span class="w"> </span>following<span class="w"> </span>questions<span class="w"> </span>so<span class="w"> </span>this<span class="w"> </span>script<span class="w"> </span>can<span class="w"> </span>generate<span class="w"> </span>the<span class="w"> </span>files
+needed<span class="w"> </span>by<span class="w"> </span>Pelican.
+
+
+&gt;<span class="w"> </span>Where<span class="w"> </span><span class="k">do</span><span class="w"> </span>you<span class="w"> </span>want<span class="w"> </span>to<span class="w"> </span>create<span class="w"> </span>your<span class="w"> </span>new<span class="w"> </span>web<span class="w"> </span>site?<span class="w"> </span><span class="o">[</span>.<span class="o">]</span><span class="w"> </span>
+&gt;<span class="w"> </span>What<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>the<span class="w"> </span>title<span class="w"> </span>of<span class="w"> </span>this<span class="w"> </span>web<span class="w"> </span>site?<span class="w"> </span>My<span class="w"> </span>Cool<span class="w"> </span>Site
+&gt;<span class="w"> </span>Who<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>the<span class="w"> </span>author<span class="w"> </span>of<span class="w"> </span>this<span class="w"> </span>web<span class="w"> </span>site?<span class="w"> </span>Danger<span class="w"> </span>Doggo
+&gt;<span class="w"> </span>What<span class="w"> </span>will<span class="w"> </span>be<span class="w"> </span>the<span class="w"> </span>default<span class="w"> </span>language<span class="w"> </span>of<span class="w"> </span>this<span class="w"> </span>web<span class="w"> </span>site?<span class="w"> </span><span class="o">[</span>en<span class="o">]</span><span class="w"> </span>
+&gt;<span class="w"> </span>Do<span class="w"> </span>you<span class="w"> </span>want<span class="w"> </span>to<span class="w"> </span>specify<span class="w"> </span>a<span class="w"> </span>URL<span class="w"> </span>prefix?<span class="w"> </span>e.g.,<span class="w"> </span>https://example.com<span class="w">   </span><span class="o">(</span>Y/n<span class="o">)</span><span class="w"> </span>n
+&gt;<span class="w"> </span>Do<span class="w"> </span>you<span class="w"> </span>want<span class="w"> </span>to<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>article<span class="w"> </span>pagination?<span class="w"> </span><span class="o">(</span>Y/n<span class="o">)</span><span class="w"> </span>Y
+&gt;<span class="w"> </span>How<span class="w"> </span>many<span class="w"> </span>articles<span class="w"> </span>per<span class="w"> </span>page<span class="w"> </span><span class="k">do</span><span class="w"> </span>you<span class="w"> </span>want?<span class="w"> </span><span class="o">[</span><span class="m">10</span><span class="o">]</span><span class="w"> </span>
+&gt;<span class="w"> </span>What<span class="w"> </span>is<span class="w"> </span>your<span class="w"> </span><span class="nb">time</span><span class="w"> </span>zone?<span class="w"> </span><span class="o">[</span>Europe/Paris<span class="o">]</span><span class="w"> </span>America/Edmonton
+&gt;<span class="w"> </span>Do<span class="w"> </span>you<span class="w"> </span>want<span class="w"> </span>to<span class="w"> </span>generate<span class="w"> </span>a<span class="w"> </span>tasks.py/Makefile<span class="w"> </span>to<span class="w"> </span>automate<span class="w"> </span>generation<span class="w"> </span>and<span class="w"> </span>publishing?<span class="w"> </span><span class="o">(</span>Y/n<span class="o">)</span><span class="w"> </span>Y
+&gt;<span class="w"> </span>Do<span class="w"> </span>you<span class="w"> </span>want<span class="w"> </span>to<span class="w"> </span>upload<span class="w"> </span>your<span class="w"> </span>website<span class="w"> </span>using<span class="w"> </span>FTP?<span class="w"> </span><span class="o">(</span>y/N<span class="o">)</span><span class="w"> </span>N
+&gt;<span class="w"> </span>Do<span class="w"> </span>you<span class="w"> </span>want<span class="w"> </span>to<span class="w"> </span>upload<span class="w"> </span>your<span class="w"> </span>website<span class="w"> </span>using<span class="w"> </span>SSH?<span class="w"> </span><span class="o">(</span>y/N<span class="o">)</span><span class="w"> </span>N
+&gt;<span class="w"> </span>Do<span class="w"> </span>you<span class="w"> </span>want<span class="w"> </span>to<span class="w"> </span>upload<span class="w"> </span>your<span class="w"> </span>website<span class="w"> </span>using<span class="w"> </span>Dropbox?<span class="w"> </span><span class="o">(</span>y/N<span class="o">)</span><span class="w"> </span>N
+&gt;<span class="w"> </span>Do<span class="w"> </span>you<span class="w"> </span>want<span class="w"> </span>to<span class="w"> </span>upload<span class="w"> </span>your<span class="w"> </span>website<span class="w"> </span>using<span class="w"> </span>S3?<span class="w"> </span><span class="o">(</span>y/N<span class="o">)</span><span class="w"> </span>N
+&gt;<span class="w"> </span>Do<span class="w"> </span>you<span class="w"> </span>want<span class="w"> </span>to<span class="w"> </span>upload<span class="w"> </span>your<span class="w"> </span>website<span class="w"> </span>using<span class="w"> </span>Rackspace<span class="w"> </span>Cloud<span class="w"> </span>Files?<span class="w"> </span><span class="o">(</span>y/N<span class="o">)</span><span class="w"> </span>N
+&gt;<span class="w"> </span>Do<span class="w"> </span>you<span class="w"> </span>want<span class="w"> </span>to<span class="w"> </span>upload<span class="w"> </span>your<span class="w"> </span>website<span class="w"> </span>using<span class="w"> </span>GitHub<span class="w"> </span>Pages?<span class="w"> </span><span class="o">(</span>y/N<span class="o">)</span><span class="w"> </span>Y
+&gt;<span class="w"> </span>Is<span class="w"> </span>this<span class="w"> </span>your<span class="w"> </span>personal<span class="w"> </span>page<span class="w"> </span><span class="o">(</span>username.github.io<span class="o">)</span>?<span class="w"> </span><span class="o">(</span>y/N<span class="o">)</span><span class="w"> </span>N
+Done.<span class="w"> </span>Your<span class="w"> </span>new<span class="w"> </span>project<span class="w"> </span>is<span class="w"> </span>available<span class="w"> </span>at<span class="w"> </span>/path/to/your/project
+</code></pre></div>
+
+<h3 id="lab-instructions">Lab Instructions</h3>
+<h4 id="phase-one-simple-pelican-site">Phase One: Simple Pelican Site</h4>
+<h5 id="create-your-first-article">Create your first Article</h5>
+<p>Create a file inside the <code>content</code> folder with some content. For example, you can use <code>content/my-first-article.md</code> with the following:</p>
+<div class="highlight"><pre><span></span><code>title: My First Article
+date: 2019-01-07 8:00
+category: Blog
+<span class="gu">authors: Your Name or Github Username or Some Alias</span>
+<span class="gu">----</span>
+
+I like free static web hosting.
+</code></pre></div>
+
+<h5 id="enable-custom-themes-for-your-site">Enable Custom Themes for your Site</h5>
+<p>Make a directory called <code>templates</code>. Within this directory, create a new theme directory containing a templates folder and a static folder.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># On Ubuntu and macOS:</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span>templates/mytheme/static
+mkdir<span class="w"> </span>-p<span class="w"> </span>templates/mytheme/templates
+</code></pre></div>
+
+<p>On Windows you need to create the same structure.</p>
+<p>Within the <code>templates/mytheme/templates</code> directory, create a new file <code>base.html</code>. Within the <code>templates/mytheme/static</code> directory, create a new file <code>fancy.css</code>.</p>
+<div class="highlight"><pre><span></span><code>touch<span class="w"> </span>templates/mytheme/templates/base.html
+touch<span class="w"> </span>templates/mytheme/static/fancy.css
+</code></pre></div>
+
+<p>Add the following content to the file <code>templates/mytheme/templates/base.html</code>.</p>
+<div class="highlight"><pre><span></span><code>{% extends &quot;!simple/base.html&quot; %}
+
+{% block head %}
+{{ super() }}
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;_stylesheet&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/theme/fancy.css&quot;</span> <span class="p">/&gt;</span>
+{% endblock %}
+</code></pre></div>
+
+<p>Modify the content of the <code>templates/mytheme/static/fancy.css</code> file to your preference. A quick sample stylesheet can be found below.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">html</span><span class="o">,</span><span class="w"> </span><span class="nt">body</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+<span class="w">    </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#000000</span><span class="p">;</span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#ffffff</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>This is just to get you started, you will have to add a lot to <code>fancy.css</code> later!</p>
+<p>Add your theme to your <em>pelicanconf.py</em> file.</p>
+<div class="highlight"><pre><span></span><code><span class="n">THEME</span> <span class="o">=</span> <span class="s1">&#39;templates/mytheme&#39;</span>
+</code></pre></div>
+
+<p>In publishconf.py, Comment out <code>CATEGORY_FEED_ATOM</code>.</p>
+<ul>
+<li>See <a href="https://github.com/getpelican/pelican/issues/2489">pelican/issues/2489</a></li>
+</ul>
+<h5 id="generate-and-preview-your-site">Generate and preview your site</h5>
+<h6 id="for-mac-and-ubuntu">For Mac And Ubuntu:</h6>
+<p><code>make devserver</code> should work if you have make installed and the virtual environment activated.</p>
+<h6 id="for-windows">For Windows:</h6>
+<div class="highlight"><pre><span></span><code>pelican<span class="w"> </span>content
+pelican<span class="w"> </span>--listen
+</code></pre></div>
+
+<p>Your site should now be available at <a href="http://localhost:8000">http://localhost:8000</a>.</p>
+<h6 id="for-ubuntu-on-windows-wsl">For Ubuntu on Windows (WSL):</h6>
+<p>Get your Ubuntu VM's IP address using the <code>ip addr show dev eth0</code> command on Ubuntu. It will be something similar to <code>172.19.46.249</code>.
+Use <code>make devserver-global</code> on Ubuntu. Then you can point your browser at <code>http://yourubuntuvmsipaddress:8000</code>, for example <code>http://172.19.46.249:8000</code>.</p>
+<h5 id="prepare-your-pelican-site-for-github-pages">Prepare your Pelican Site for GitHub Pages</h5>
+<p>Update <em>publishconf.py</em> and set <code>SITEURL</code> to your GitHub given URL.</p>
+<div class="highlight"><pre><span></span><code><span class="n">SITEURL</span> <span class="o">=</span> <span class="s1">&#39;https://uofa-cmput404.github.io/your-repository-name&#39;</span>
+</code></pre></div>
+
+<p>So if your GitHub repo was <code>f24-d01-d02-labsignment-pelican-hazelcam</code>, you'd put:</p>
+<div class="highlight"><pre><span></span><code><span class="n">SITEURL</span> <span class="o">=</span> <span class="s1">&#39;https://uofa-cmput404.github.io/f24-d01-d02-labsignment-pelican-hazelcam&#39;</span>
+</code></pre></div>
+
+<p>You need to disable GitHub's built-in static site generator, Jekyll.
+Jekyll is a static site generator like Pelican, except that it's written in Ruby.
+However, sometimes it can conflict with Pelican. In order to disable it, you need to have Pelican produce a file called <code>.nojekyll</code>.
+You can do that by creating a page with Pelican in the <code>content/pages</code> folder (create it if it doesn't exist). You could call it something like <code>content/pages/nojekyll.md</code>.</p>
+<div class="highlight"><pre><span></span><code>title: Disables Jekyll
+status: hidden
+url: .nojekyll
+<span class="gu">save_as: .nojekyll</span>
+<span class="gu">----</span>
+
+This file just disables Jekyll
+</code></pre></div>
+
+<p>Run <code>make html</code> (macOS or Ubuntu) or <code>pelican content -o output -s pelicanconf.py</code> (Windows or if you don't have make).
+Check the <code>output</code> directory: it should contain a file called <code>.nojekyll</code>.</p>
+<p>Make sure to not commit the <code>output</code> directory to your GitHub: add it to your <code>.gitignore</code>. <code>ghp-import</code> will commit it later as a separate branch.</p>
+<h5 id="enable-github-pages-on-github">Enable GitHub Pages on GitHub</h5>
+<p>Create a branch in your GitHub repo called <code>pages</code>.</p>
+<p>Enable GitHub Pages for your repo. It is in the repo settings under pages, then select "Deploy from a branch". Select your "pages" branch. For more information, see <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-from-a-branch">GitHub's Documentation</a>.</p>
+<h6 id="deploy-from-macos-or-ubuntu">Deploy from macOS or Ubuntu</h6>
+<ul>
+<li>Set your pages branch name in <code>Makefile</code>: set <code>GITHUB_PAGES_BRANCH=pages</code> so that ghp-import doesn't overwrite your <code>main</code> branch.</li>
+<li>Deploy using <code>make github</code>.</li>
+<li>If you get ghp-import error. Install ghp-import to your virtual environment using pip. (<code>pip install ghp-import</code>)</li>
+</ul>
+<h6 id="deploy-from-windows-or-without-make">Deploy from Windows or Without Make</h6>
+<p>Make sure to include the <code>-b pages</code> to specify your pages branch so that ghp-import doesn't overwrite your <code>main</code> branch.</p>
+<div class="highlight"><pre><span></span><code>pelican<span class="w"> </span>content<span class="w"> </span>-o<span class="w"> </span>output<span class="w"> </span>-s<span class="w"> </span>publishconf.py
+ghp-import<span class="w"> </span>output<span class="w"> </span>-b<span class="w"> </span>pages
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>pages
+</code></pre></div>
+
+<p><strong>When building for GitHub:</strong> you should use <code>publishconf.py</code> not <code>pelicanconf.py</code>. That is what it is there for: so you can have different settings for local development and for publishing to anywhere (including GitHub Pages).</p>
+<h5 id="check-your-github-pages-site">Check your GitHub Pages site</h5>
+<p>Your GitHub Pages site should be at a URL like <code>https://uofa-cmput404.github.io/GITHUB REPO NAME/</code> a couple of minutes after pushing.
+For example: <code>https://uofa-cmput404.github.io/w24-h01-labsignment-pelican-hazelybell/</code>.</p>
+<h4 id="phase-two-add-content-to-your-site">Phase Two: Add content to your site</h4>
+<p>Create 3 more articles for your site from 3 project <a href="http://www.gutenberg.org/browse/scores/top">Gutenberg</a> books of your choosing.
+You can directly download the HTML file from the website.</p>
+<p>The Project Gutenberg HTML files contain HTML for a full webpage.
+Your Pelican articles should only include the necessary HTML format the contents of your books correctly.
+For example, the Project Gutenberg pages contain the <code>&lt;head&gt;</code> element for a webpage, but Pelican will generate its own <code>&lt;head&gt;</code> element from its Jinja HTML templates. In Pelican, the <code>&lt;head&gt;</code> is used to provide metadata.
+So, you should replace the <code>&lt;head&gt;</code> element in your Pelican articles with one that provides the metadata Pelican is looking for.
+Make sure to remove all unnecessary HTML from the Project Gutenberg HTML.</p>
+<p>You should also add the metadata for Pelican similar to how you did for your first article above. Also, be sure to cite where you got your
+book from: the Project Gutenberg.</p>
+<p>For example, if you chose Moby Dick you could make your <code>content/moby-dick.html</code> look like this:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Moby Dick<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;tags&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;novel&quot;</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;date&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;2024-02-04&quot;</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;modified&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;2024-02-04&quot;</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;category&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;books&quot;</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;authors&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;Herman Melville&quot;</span> <span class="p">/&gt;</span>
+                <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;summary&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;The Project Gutenberg eBook of Moby Dick; Or, The Whale&quot;</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;source&quot;</span><span class="p">&gt;</span>This is a copy of <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://www.gutenberg.org/cache/epub/2701/pg2701-images.html&quot;</span><span class="p">&gt;</span>Moby Dick from the Project Gutenberg Website<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>, as of 2024-02-04. This ebook is for the use of anyone anywhere in the United States and most other parts of the world at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with this ebook or online at www.gutenberg.org. If you are not located in the United States, you will have to check the laws of the country where you are located before using this eBook.
+            <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>
+                    MOBY-DICK;<span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+                    or, THE WHALE.<span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+            ... a lot more HTML ...
+        <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p>Notice that I removed the original webpages <code>&lt;head&gt;</code> in the example above and replaced it with one suitable for Pelican. For more information about how to write Pelican articles, see <a href="https://docs.getpelican.com/en/stable/content.html">their documentation</a>.</p>
+<p>Commit and push your books to GitHub: check that they are working correctly.</p>
+<p>Compare the output HTML from Pelican with that of the HTML you wrote for your books. Pelican should have added a lot more HTML around
+the HTML you put in your <code>&lt;body&gt;</code>.</p>
+<p>You can add images using attach, as described in the pelican documentation: <a href="https://docs.getpelican.com/en/latest/content.html#attaching-static-files">https://docs.getpelican.com/en/latest/content.html#attaching-static-files</a></p>
+<h4 id="phase-three-playing-around-with-css">Phase Three: Playing around with CSS</h4>
+<p>Write CSS to enable your site to have fancy mode, 90s mode, minimal mode, and responsiveness in both desktop and mobile views.  </p>
+<ul>
+<li>Fancy Mode: You can take inspiration from modern websites such as Amazon, Facebook, Google, GitHub, or Microsoft, but <strong>do not copy their code.</strong><ul>
+<li>These websites have thousands of lines copyrighted CSS that you do not need and do not have permission from Amazon/Facebook/Google to copy. However, you can use your browser's Dev Tools to see how they accomplish certain things and take inspiration from that.</li>
+<li>Try to make your fancy mode look like a standard, modern website. Try to make it look like a website that you would want to use.</li>
+</ul>
+</li>
+<li>90s Mode: You can take inspiration from the <a href="https://theoatmeal.com/comics/design_hell?fbclid=IwAR32De0TRFISnARpWunp3jvoCF1k1iXdotYZbvenRJOvqUCeaJwABk91JFw">oatmeal comic</a> or <a href="https://www.spacejam.com/1996/">space jam</a>. Try to make it like those 90s websites.</li>
+<li>Minimal Mode: Try to make the page look good and clean for printing. Use a minimalism-style design. Minimalism is about removing any unnecessary elements of the design such as lines, colours, shapes, and backgrounds.<ul>
+<li>Try to make your print mode look good for printing. Check what it looks like by printing it to a PDF file (you don't need to print it to physical paper).</li>
+</ul>
+</li>
+<li>Every part of the page should be very different between the 3 modes.</li>
+<li>You should include CSS that styles every visible HTML element on the pages.</li>
+<li>You should NOT include CSS that styles elements which your page does not have.</li>
+<li>Include some changes that make your site uniquely yours. For example: your favourite colour, your favourite fonts, etc.</li>
+</ul>
+<p>You should use 3 JavaScript buttons to switch between these. For example, inside your <code>/templates/mytheme/templates/base.html</code> you can add the following inside <code>{% block head %}</code>. </p>
+<p>This doesn't necessarily have to go inside <code>{% block head %}</code>, you could for example put it outside <code>{% block head %}</code> to have it always show up, or inside a different block. But for the snippet to make it into the rendered page, you have to make sure that child (more specific templates like <code>article.html</code>,<code>index.html</code>, etc.) don't overwrite the block. </p>
+<p>See template inheritance documentation for more details: 
+https://jinja.palletsprojects.com/en/3.0.x/templates/#template-inheritance</p>
+<div class="highlight"><pre><span></span><code>        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;changeStylesheet(&#39;fancy.css&#39;)&quot;</span><span class="p">&gt;</span>fancy mode<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;changeStylesheet(&#39;minimal.css&#39;)&quot;</span><span class="p">&gt;</span>minimal mode<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;changeStylesheet(&#39;90s.css&#39;)&quot;</span><span class="p">&gt;</span>90s mode<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">stylesheetRegex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sr">/[^/]*\.css$/</span>
+
+<span class="w">        </span><span class="kd">function</span><span class="w"> </span><span class="nx">changeStylesheet</span><span class="p">(</span><span class="nx">style</span><span class="p">){</span>
+<span class="w">                </span><span class="kd">let</span><span class="w"> </span><span class="nx">element</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;_stylesheet&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">element</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">element</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s2">&quot;href&quot;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="nx">stylesheetRegex</span><span class="p">,</span><span class="w"> </span><span class="nx">style</span><span class="p">))</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<p>Then create the corresponding CSS files:</p>
+<ul>
+<li><code>templates/mytheme/static/minimal.css</code></li>
+<li><code>templates/mytheme/static/90s.css</code></li>
+</ul>
+<p><code>templates/mytheme/static/fancy.css</code> Should already exist from earlier. Clicking on one of the buttons will replace the stylesheet with the one corresponding with each mode. </p>
+<h5 id="css-requirements">CSS Requirements</h5>
+<p class="warning">The 3 css files aren't allowed to share any code. To be on the safe side, you can create each style from scratch to produce 3 unique sets of styling rules for your site.</p>
+
+<p>Each of the three styles should have differences in the following ways. The differences should be large, <strong>obvious</strong>, and visible. It should be difficult to tell that they're the same HTML at all!
+You should not need to explain how your three CSS styles are different, because it should be obvious by looking at the results in a browser.</p>
+<ul>
+<li>3 different layouts<ul>
+<li>For example, if the navigation menu is at the top of the page, it should NOT be at the top in the other two versions!</li>
+</ul>
+</li>
+<li>3 different sets of fonts</li>
+<li>3 different ways of styling the text<ul>
+<li>3 different ways of making headings stand out from the rest of the text</li>
+<li>3 different ways of making links stand out from the rest of the text<ul>
+<li>Links for different purposes (e.g. menu links vs links in the content) should be styled differently</li>
+</ul>
+</li>
+<li>3 different ways of separating paragraphs</li>
+<li>...</li>
+</ul>
+</li>
+<li>3 different ways of organizing navigation links</li>
+<li>3 different colour schemes</li>
+<li>3 different sets of images<ul>
+<li>These could be logos, decorations, backgrounds, borders, horizontal rules, icons, emojis...</li>
+<li>Not including the images that came from Gutenberg (although these should be styled with CSS)</li>
+</ul>
+</li>
+<li>3 different kinds of borders</li>
+<li>3 different backgrounds<ul>
+<li>Make them as different as possible. Three different colours is not different enough. Try different kinds of images, gradients, animations...</li>
+</ul>
+</li>
+<li>3 different sets of margins &amp; paddings &amp; sizes</li>
+<li>3 different ways of using vertical &amp; horizontal alignments</li>
+<li>3 different sets of effects (gradients, opacity/transparencies, floating elements, absolute elements...)</li>
+<li>3 different ways of including some changes that make your site uniquely yours. For example: your favourite colour, your favourite fonts, etc.</li>
+<li>1 layout should use <code>flexbox</code> to change the layout<ul>
+<li>See the MDN guide on <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox">how to use Flexbox</a></li>
+</ul>
+</li>
+<li>Every visible HTML element should be customized by your CSS in some way<ul>
+<li>Every element class should be styled. For example: the <code>source</code> class in the HTML above.</li>
+</ul>
+</li>
+<li>Do not include CSS for elements that your page does not have!</li>
+<li>Additionally, use media queries to apply different styling for different screen sizes. Here is an example:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="o">/*</span><span class="w"> </span><span class="n">Extra</span><span class="w"> </span><span class="n">small</span><span class="w"> </span><span class="n">devices</span><span class="w"> </span><span class="p">(</span><span class="n">phones</span><span class="p">,</span><span class="w"> </span><span class="mi">600</span><span class="n">px</span><span class="w"> </span><span class="nb">and</span><span class="w"> </span><span class="n">down</span><span class="p">)</span><span class="w"> </span><span class="o">*/</span>
+<span class="p">@</span><span class="n">media</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="n">screen</span><span class="w"> </span><span class="nb">and</span><span class="w"> </span><span class="p">(</span><span class="nb">max</span><span class="o">-</span><span class="n">width</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="n">px</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">/*</span><span class="w"> </span><span class="n">Add</span><span class="w"> </span><span class="n">styling</span><span class="w"> </span><span class="n">here</span><span class="w"> </span><span class="o">*/</span>
+<span class="p">}</span>
+
+<span class="o">/*</span><span class="w"> </span><span class="n">Small</span><span class="w"> </span><span class="n">devices</span><span class="w"> </span><span class="p">(</span><span class="n">portrait</span><span class="w"> </span><span class="n">tablets</span><span class="w"> </span><span class="nb">and</span><span class="w"> </span><span class="n">large</span><span class="w"> </span><span class="n">phones</span><span class="p">,</span><span class="w"> </span><span class="mi">600</span><span class="n">px</span><span class="w"> </span><span class="nb">and</span><span class="w"> </span><span class="n">up</span><span class="p">)</span><span class="w"> </span><span class="o">*/</span>
+<span class="p">@</span><span class="n">media</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="n">screen</span><span class="w"> </span><span class="nb">and</span><span class="w"> </span><span class="p">(</span><span class="nb">min</span><span class="o">-</span><span class="n">width</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="n">px</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="o">/*</span><span class="w"> </span><span class="n">Add</span><span class="w"> </span><span class="n">styling</span><span class="w"> </span><span class="n">here</span><span class="w"> </span><span class="o">*/</span>
+<span class="p">}</span>
+
+<span class="o">/*</span><span class="w"> </span><span class="n">Medium</span><span class="w"> </span><span class="n">devices</span><span class="w"> </span><span class="p">(</span><span class="n">landscape</span><span class="w"> </span><span class="n">tablets</span><span class="p">,</span><span class="w"> </span><span class="mi">768</span><span class="n">px</span><span class="w"> </span><span class="nb">and</span><span class="w"> </span><span class="n">up</span><span class="p">)</span><span class="w"> </span><span class="o">*/</span>
+<span class="p">@</span><span class="n">media</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="n">screen</span><span class="w"> </span><span class="nb">and</span><span class="w"> </span><span class="p">(</span><span class="nb">min</span><span class="o">-</span><span class="n">width</span><span class="p">:</span><span class="w"> </span><span class="mi">768</span><span class="n">px</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="o">/*</span><span class="w"> </span><span class="n">Add</span><span class="w"> </span><span class="n">styling</span><span class="w"> </span><span class="n">here</span><span class="w"> </span><span class="o">*/</span>
+<span class="p">}</span>
+
+<span class="o">/*</span><span class="w"> </span><span class="n">Large</span><span class="w"> </span><span class="n">devices</span><span class="w"> </span><span class="p">(</span><span class="n">laptops</span><span class="o">/</span><span class="n">desktops</span><span class="p">,</span><span class="w"> </span><span class="mi">992</span><span class="n">px</span><span class="w"> </span><span class="nb">and</span><span class="w"> </span><span class="n">up</span><span class="p">)</span><span class="w"> </span><span class="o">*/</span>
+<span class="p">@</span><span class="n">media</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="n">screen</span><span class="w"> </span><span class="nb">and</span><span class="w"> </span><span class="p">(</span><span class="nb">min</span><span class="o">-</span><span class="n">width</span><span class="p">:</span><span class="w"> </span><span class="mi">992</span><span class="n">px</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="o">/*</span><span class="w"> </span><span class="n">Add</span><span class="w"> </span><span class="n">styling</span><span class="w"> </span><span class="n">here</span><span class="w"> </span><span class="o">*/</span>
+<span class="p">}</span>
+
+<span class="o">/*</span><span class="w"> </span><span class="n">Extra</span><span class="w"> </span><span class="n">large</span><span class="w"> </span><span class="n">devices</span><span class="w"> </span><span class="p">(</span><span class="n">large</span><span class="w"> </span><span class="n">laptops</span><span class="w"> </span><span class="nb">and</span><span class="w"> </span><span class="n">desktops</span><span class="p">,</span><span class="w"> </span><span class="mi">1200</span><span class="n">px</span><span class="w"> </span><span class="nb">and</span><span class="w"> </span><span class="n">up</span><span class="p">)</span><span class="w"> </span><span class="o">*/</span>
+<span class="p">@</span><span class="n">media</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="n">screen</span><span class="w"> </span><span class="nb">and</span><span class="w"> </span><span class="p">(</span><span class="nb">min</span><span class="o">-</span><span class="n">width</span><span class="p">:</span><span class="w"> </span><span class="mi">1200</span><span class="n">px</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="o">/*</span><span class="w"> </span><span class="n">Add</span><span class="w"> </span><span class="n">styling</span><span class="w"> </span><span class="n">here</span><span class="w"> </span><span class="o">*/</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>You can read more about CSS and Media Queries <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries">here</a></p>
+<h5 id="testing-it-on-the-browser">Testing it on the Browser</h5>
+<p>Firefox is the standard for marking in this class, so it's a good idea to test your site using Firefox.</p>
+<p>Click on the different buttons to test out each mode. </p>
+<p>You should also try simulating various devices with different displays to make sure your website is "responsive." Both browsers have a button
+to enable device simulation mode. Firefox's button looks like a phone in front of a tablet.
+You can change to Desktop and mobile view by click on this button.
+<br><img id="mobile-view" alt="mobile-view" src="../labsignments/Desktop-Mobile-view.png" style="width: 50%;"> </p>
+<h3 id="tips-tricks">Tips &amp; Tricks</h3>
+<p>In this assignment you will be evaluated on how well you followed the 'spirit' of the assignment as well as the technical implementation. </p>
+<p>To be specific, the spirit of the assignment is to have you express yourself in a creative way across the 3 themes/modes. We want to see your vision for a modern/fancy website, a minimalist website, and a throwback to retro 90s websites.</p>
+<p>You should be proud of each mode, and leverage CSS <em>in combination</em> with your creativity to make each shine. Each should be a unique experience (more on this later). </p>
+<p>You <strong>can</strong> break the CSS requirements listed above in order deliver on your ideas. Conversly, you can follow the CSS requirements perfectly and fail to recieve full marks if it seems like you tried to make as few changes between modes as possible. </p>
+<h4 id="different-layouts-arise-from-different-user-experiences">Different layouts arise from different user experiences</h4>
+<p>So how can you be sure you'll get full marks for having 3 different layouts/styles if following the CSS requirements isn't enough? </p>
+<p>The answer is to construct different user experiences. Once you have the Gutenberg content displaying with no CSS on your website, stop. The temptation for your first mode will be to 'make it look fancy/minimal/90s', this is a trap.</p>
+<blockquote>
+<p>The temptation for your first mode will be to 'make it look fancy/minimal/90s', this is a trap.</p>
+</blockquote>
+<p>Instead take some time and think about the content. They are books. Maybe you picked the books according to some theme. How might a user want to interact with this content?</p>
+<h4 id="fancy-mode">Fancy Mode</h4>
+<p>In a fancy mode for example, inspire yourself from modern ebook websites <a href="https://www.ebooks.com/en-ca/free">like this one</a> or <a href="https://manybooks.net/">this one</a>. Think about your own experiences visiting libraries or book shops. </p>
+<p>Now think about how you can translate elements of those experiences to your fancy mode. In book shops for example, book covers are displayed prominently, this could translate into a grid view with the book cover images from project Gutenberg displayed. The grid can then be styled to look like a shelf. When you hover over one of the books maybe the book expands and drops a shadow to feel like you're picking it up off the shelf.</p>
+<p>When you've clicked on a specific book, you are now looking to build a reading experience. </p>
+<p>What does it feels like to sit and read your favourite book indoors on a rainy day? </p>
+<p>Maybe you could style the background image to be raindrops against a window. The content of the book itself could be styled to look as if it is paper.  </p>
+<p>What kind of features would you want while you're reading? Perhaps it would be useful if the table of contents was always displayed as a sidebar that stuck with you as your scrolled down the page, allowing you easy access to different chapters. </p>
+<h4 id="modify-the-html">Modify the HTML</h4>
+<blockquote>
+<p>You will likely struggle to realize your ideas if you do not make modifications to the HTML as well as the CSS.</p>
+</blockquote>
+<p>Consider the shelf idea from the <a href="#fancy-mode">fancy mode</a> section. The way articles are displayed by default won't allow you to place the book covers on your index page. To change this you'll have to modify the <code>index.html</code> template.</p>
+<p>Take a look at how other pelican theme developers did this, <a href="https://github.com/getpelican/pelican-themes">here is a huge collection of pelican themes</a> to learn from. </p>
+<p>Let's see how the <code>simple-bootstrap</code> theme modifies its index.html: </p>
+<div class="highlight"><pre><span></span><code>{% extends &quot;base.html&quot; %}
+
+{% block navclass %}active{%endblock%}
+
+{% block content %}
+<span class="p">&lt;</span><span class="nt">section</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;content&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;content&quot;</span><span class="p">&gt;</span>
+    {% block content_title %}
+
+    {% endblock %}
+
+    {% for article in articles_page.object_list %}
+            <span class="p">&lt;</span><span class="nt">article</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;hentry&quot;</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">header</span><span class="p">&gt;</span> 
+                        <span class="p">&lt;</span><span class="nt">h2</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;entry-title&quot;</span><span class="p">&gt;</span>
+                            <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ SITEURL }}/{{ article.url }}&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;bookmark&quot;</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;Permalink to {{ article.title|striptags }}&quot;</span><span class="p">&gt;</span>{{ article.title }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+                            <span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span> 
+                    <span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+                    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;entry-content&quot;</span><span class="p">&gt;</span> {{ article.summary }} <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+                    <span class="cm">&lt;!-- entry-content --&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">article</span><span class="p">&gt;</span>
+    {% endfor %}
+
+    {% include &#39;pagination.html&#39; %}
+<span class="p">&lt;/</span><span class="nt">section</span><span class="p">&gt;</span><span class="cm">&lt;!-- content --&gt;</span>
+
+{% endblock content %}
+</code></pre></div>
+
+<p>Notice how they've made a custom definition for the how the articles are diplayed on the index page. It is there where you're going to want to insert the book cover image if you were to attempt implementing the fancy mode idea. You could add a metadata field to the article that contains the path to the cover image, and then use an <code>&lt;img&gt;</code> tag to display it in the <code>index.html</code> template. </p>
+<h4 id="avoid-variations">Avoid Variations</h4>
+<p>As mentioned before:</p>
+<blockquote>
+<p>The temptation for your first mode will be to 'make it look fancy/minimal/90s', this is a trap.</p>
+</blockquote>
+<p>It is a trap because after you do it, you're going to be tempted to take the one mode you've made, and just 'tweak' it to create the other 2. </p>
+<p>The following 4 screenshots all show the same layout. A student submitting the modes below would recieve points for only 1 layout.</p>
+<p><img src="../labsignments/images/bad-1.png" alt="bad-layout-1" width="600"/>
+<img src="../labsignments/images/bad-2.png" alt="bad-layout-2" width="600"/>
+<img src="../labsignments/images/bad-3.png" alt="bad-layout-3" width="600"/>
+<img src="../labsignments/images/bad-4.png" alt="bad-layout-4" width="600"/></p>
+<p>Similarily, these following screenshots also contain only a single layout.</p>
+<p><img src="../labsignments/images/bad-1-article.png" alt="bad-layout-5" width="600"/>
+<img src="../labsignments/images/bad-2-article.png" alt="bad-layout-6" width="600"/></p>
+<p>All this is to say, small adjustments, even if they satisfy the CSS restrictions are not a good way to get all possible marks for this assignment. If you find yourself arguing that technically X makes it a different layout, you're unlikely to get credit for making a different layout. </p>
+<h4 id="examples-from-past-cmput404-students">Examples from past Cmput404 students</h4>
+<p>A collection of examples from students who got high grades on this labsignment. Click on each sample to switch between fancy, minimal and 90s mode.</p>
+<!-- Need to include/load all images so pelican makes them available. Without this, the image links will break -->
+<p><img src="../labsignments/images/sample-90s-mode-1.png"  style="display:none"></p>
+<p><img src="../labsignments/images/sample-90s-mode-2.png"  style="display:none"></p>
+<p><img src="../labsignments/images/sample-90s-mode-3.png" style="display:none"></p>
+<p><img src="../labsignments/images/sample-minimal-mode-1.png" style="display:none"></p>
+<p><img src="../labsignments/images/sample-minimal-mode-2.png" style="display:none"></p>
+<p><img src="../labsignments/images/sample-minimal-mode-3.png" style="display:none"></p>
+<p><img  src="../labsignments/images/sample-fancy-mode-1.png" style="display:none"></p>
+<p><img src="../labsignments/images/sample-fancy-mode-2.gif" style="display:none"></p>
+<p><img src="../labsignments/images/sample-fancy-mode-3.png"  style="display:none"></p>
+<!-- These are the actual sample 'windows'/displays which rotate when clicked. -->
+
+<p><img id="sample-1" src="../labsignments/images/sample-fancy-mode-1.png" alt="sample-1" width="600" height="300"></p>
+<p><img id="sample-2" src="../labsignments/images/sample-minimal-mode-2.png" alt="sample-2" width="600" height="300"></p>
+<p><img id="sample-3" src="../labsignments/images/sample-90s-mode-3.png" alt="sample-3" width="600" height="300"></p>
+<script>
+
+    /**
+     * Set up lists of image names for each sample, iterating through these 
+     * will be how we 'rotate'. 
+     */
+    const sample1Src = ["sample-fancy-mode-1.png", "sample-minimal-mode-1.png",  "sample-90s-mode-1.png"]
+
+    const sample2Src = ["sample-fancy-mode-2.gif", "sample-minimal-mode-2.png", "sample-90s-mode-2.png"]
+
+    const sample3Src = ["sample-fancy-mode-3.png", "sample-minimal-mode-3.png", "sample-90s-mode-3.png"]
+
+    function rotateImg(id, srcs){
+        const imgElement = document.getElementById(id)
+        let srcAttribute = imgElement.getAttribute("src")
+        let srcPath = srcAttribute.split("/")
+
+        //After splitting by '/', the last element will be the image file name
+        let currentImage = srcPath[srcPath.length-1] 
+
+        //Lookup the index of the current image in the srcs array, and get the next image. Reset back the index 0 by taking the mod length of the srcs array.
+        let nextIndex = (srcs.indexOf(currentImage) + 1) % srcs.length
+
+        //Update the srcPath array so the last element will be the next image to display.
+        srcPath[srcPath.length-1] = srcs[nextIndex]
+
+        //Compute the updated src attribute value by undoing the split('/') with join('/')
+        imgElement.setAttribute("src", srcPath.join('/'))
+    }
+
+    //Bind rotateImg function to click event for each sample.
+    document.getElementById("sample-1").addEventListener("click", ()=>rotateImg('sample-1', sample1Src))
+
+    document.getElementById("sample-2").addEventListener("click", ()=>rotateImg('sample-2', sample2Src))
+
+    document.getElementById("sample-3").addEventListener("click", ()=>rotateImg('sample-3', sample3Src))
+
+</script>
+
+<h3 id="restrictions">Restrictions</h3>
+<p>Violation of the restrictions will result in a mark of zero.</p>
+<ul>
+<li>Must use Python3</li>
+<li>Using of any frontend frameworks, CSS libraries, JS libraries or frameworks is forbidden. <ul>
+<li>You must write plain CSS and HTML. </li>
+<li>The <strong>only</strong> allowed use of JS is to switch between your three stylesheets.<ul>
+<li>You must <strong>not</strong> use JS for fonts, decorations, transitions, animations, images, colors, layout, sizing, margins, padding, alignmens, borders, backgrounds, effects, gradients, transparencies, positions, ...</li>
+</ul>
+</li>
+<li>You may not use CSS libraries or frameworks. For example: Tailwind, Bootstrap, Materialize, Bulma, Foundation, UIkit. However, just because it's not on this list does not mean it is allowed: there are 100s of examples.</li>
+<li>You may not use CSS preprocessors or transpilers. For example: Sass, Stylus, Less, PostCSS, ...</li>
+<li>You must not use frontend frameworks, HTML frameworks, HTML libraries, etc. such as React, Vue, Angular, jQuery, lodash, handlebars... <ul>
+<li>The only allowed HTML processor is Jinja: see the next point. </li>
+</ul>
+</li>
+<li>You <em>may</em> customize the Pelican <a href="https://docs.getpelican.com/en/stable/themes.html">Theme's Jinja templates</a> if you want to change the HTML produced by Pelican, but Pelican must produce plain HTML. In this situation, the Jinja templates are your "framework," which <em>is allowed.</em></li>
+</ul>
+</li>
+<li>If you borrow CSS from examples online, always cite the author, give the source URL, and the date you downloaded it.</li>
+</ul>
+<h3 id="recommendation">Recommendation</h3>
+<ul>
+<li>Go look at CSS on the internet. Check the licenses.</li>
+<li>Look how things are achieved.</li>
+</ul>
+<h3 id="requirements">Requirements</h3>
+<ul>
+<li>A functioning Pelican site <ul>
+<li>featuring four articles</li>
+<li>with completely and totally different styling in fancy mode, minimal mode, and 90s mode<ul>
+<li>See the <a href="#css-requirements">CSS Requirements</a> above!</li>
+</ul>
+</li>
+<li>responsive in both mobile and desktop views</li>
+<li>deployed on GitHub Pages.</li>
+</ul>
+</li>
+<li>A git repository with a <code>main</code> or <code>src</code> branch that does not contain built (compiled, transpiled, bundled) or downloaded artifacts, including but not limited to:<ul>
+<li><code>virtualenv</code> <code>venv</code> etc.</li>
+<li><code>.pyc</code> files, <code>__pycache__</code> directories.</li>
+<li><code>node_modules</code></li>
+<li>Folders like <code>output</code> or any other output HTML produced by Pelican.</li>
+</ul>
+</li>
+<li>A git repository with a <code>pages</code> branch that is the source of the GitHub pages website.<ul>
+<li>This contains the output HTML produced by Pelican.</li>
+</ul>
+</li>
+<li>Your site should look the same on GitHub pages as it does on your local dev server.</li>
+</ul>
+<h3 id="submission-instructions">Submission Instructions</h3>
+<p>Make sure you push to GitHub classroom <strong>BEFORE 4PM on Monday!</strong> You will not be able to push after that!</p>
+<p>Submit a link to your repo in the form <code>https://github.com/uofa-cmput404/w24-h0x-labsignment-pelican-yourgithubname</code> and your GitHub Pages URL in the form <code>https://uofa-cmput404.github.io/your-repo-name/</code> on eClass. <strong>Do not</strong> submit a link to a branch, a file, or the clone URL. If you do not do this we will not know which GitHub submission is yours.</p>
+<p class="warning">If you do not submit a link to your repo on eClass on time using the correct format above, you will get a zero.</p>
+
+<h3 id="collaboration">Collaboration</h3>
+<ul>
+<li>You may consult with others (exchange high-level ideas) but the submission should be your own source code.</li>
+<li>Collaboration must be documented in your source code.</li>
+<li>Any source code you got from anywhere else must be cited in the source code.</li>
+<li>You can only use source code that <strong>you understand</strong>: see the <a href="../general/labs.html#lab-marking">lab marking info</a></li>
+</ul>
+    <footer>
+      <p>Published: <time datetime="2024-02-01T00:00:00-07:00">
+        Thu, 01 Feb 2024 at 00:00 MST
+      </time></p>
+        <address>
+          By             <a href="../author/sadia-zahin-prodhan.html">Sadia Zahin Prodhan</a>
+            <a href="../author/hazel-campbell.html">Hazel Campbell</a>
+            <a href="../author/alexandru-ianta.html">Alexandru Ianta</a>
+        </address>
+        <p>
+          Category: <a href="../category/labsignments.html">labsignments</a>
+        </p>
+        <p>
+          Tags:
+            <a href="../tag/labs.html">labs</a>
+        </p>
+    </footer>
+  </article>
+    </main>
+    <footer>
+      <address>
+        Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+        which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+      </address>
+    </footer>
+  </body>
+</html>

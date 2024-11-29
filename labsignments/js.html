@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <title>CMPUT 404 - JS Lab</title>
+      <meta charset="utf-8" />
+      <meta name="generator" content="Pelican" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Web Applications and Architecture" />
+
+  <link rel="icon" href="../theme/favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="../theme/style.css" />
+  <link rel="stylesheet" type="text/css" href="../theme/404.css" />
+
+
+
+
+    <meta name="tags" content="javascript" />
+    <meta name="tags" content="webapp <!-- @LT-IGNORE:MORFOLOGIK_RULE_EN_CA@ -->" />
+
+  </head>
+
+  <body>
+    <header>
+      <hgroup><h1><a href="../">CMPUT 404</a></h1><p>Web Applications and Architecture</p></hgroup>
+      <nav><ul>
+          <li><a href="/general/outline.html">Outline</a></li>
+          <li><a href="/#eclass">eClass & Grades</a></li>
+          <li><a href="/#schedule">Schedule</a></li>
+          <li><a href="/general/labs.html">Labs</a></li>
+          <li><a href="/general/project.html">Project</a></li>
+          <li><a href="/general/individual.html">Participation</a></li>
+          <li><a href="/general/resources.html">Resources</a></li>
+          <li><a href="/general/help.html#discussion-forum">Discussion Forum</a></li>
+          <li><a href="/#news-notices">News & Notices</a></li>
+          <li><a href="/#lecture-zoom">Lecture Zoom</a></li>
+          <li><a href="https://uofa-cmput404.github.io/slides-xt/">Slides</a></li>
+          <li><a href="/general/help.html">Help</a></li>
+      </ul></nav>
+    </header>
+    <main>
+  <article>
+    <header>
+      <h2>
+        <a href="../labsignments/js.html" rel="bookmark"
+           title="Permalink to JS Lab">JS Lab</a></h2>
+      
+    </header>
+    <h3 id="description">Description</h3>
+<p>In this lab you will make a JS Clock/Timer/Stopwatch/Countdown "single-page" app.
+The app won't require any network traffic except loading a single HTML file.
+You will use DHTML, promises, and async/await to connect your code and make sure each piece of code runs at the same time, and that the Clock, Timer, Stopwatch, and Countdown functions all work at the same time, independently.</p>
+<h4 id="warning">Warning!</h4>
+<p class="longWarning">
+Due to the Thanksgiving holiday, there will be no walkthroughs for this lab. You will submit a single HTML file on eClass. Please ensure your code is well-commented so the TAs know that you understand your code. See the Heroku lab description for detailed examples of good vs bad comments.
+</p>
+
+<h4 id="learning-goals">Learning Goals</h4>
+<ul>
+<li>Basic DOM manipulation</li>
+<li>A thorough understanding of JS functions, methods, classes, and objects.</li>
+<li>Combining JS, HTML, and CSS into a single file.</li>
+</ul>
+<h3 id="getting-started">Getting Started</h3>
+<ol>
+<li>Create an HTML page: <code>clock.html</code>. This must contain all of your HTML, CSS and JS.</li>
+</ol>
+<h3 id="app">App</h3>
+<h4 id="html">HTML</h4>
+<ul>
+<li>Make sure your <code>&lt;head&gt;</code> has a title and specifies UTF-8 encoding.</li>
+<li>Create an element in <code>&lt;head&gt;</code> for all of your CSS code.</li>
+<li>Create an element in <code>&lt;head&gt;</code> for all of your JS code.</li>
+<li>Create a body with <strong>semantic</strong> HTML for four parts of the app: clock, timer, stopwatch, and countdown.</li>
+</ul>
+<h4 id="js">JS</h4>
+<p>You should put your JS in head in a single element. You can either have it specify a ES module, or you can start your JS with <code>'use strict';</code>.</p>
+<p>Make sure your JS doesn't try to do much before the page (and DOM) is finished loading! For example, you could create a <code>main</code> function and then have the browser call it when everything is loaded like this:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">main</span><span class="p">);</span>
+</code></pre></div>
+
+<p>Keep in mind in the above example, <code>main</code> is a reference (pointer) to a
+function or a method. <strong>You should never pass JS code as a string!</strong></p>
+<p>You should avoid using HTML attributes like <code>onload</code> or <code>onclick</code> to run JS code. Instead, use <code>addEventListener</code> like in the example above.</p>
+<h5 id="ticker-class">Ticker Class</h5>
+<p>Using the <em>observer design pattern</em>, and the <em>singleton design pattern</em>, create a JS model class that allows other classes to register to be notified once a second.</p>
+<p>You can do this using a <code>setTimeout</code> in order to update the page once a second. For the purposes of this exercise you are not allowed to use <code>setInterval</code>. In addition, you should only use <code>setTimeout</code> once, and you must make sure that only one timeout is running at a time!</p>
+<p>The ticker class needs to run approximately once per second to update the page. <strong>Do not update the page faster than twice per second, or slower than once every two seconds.</strong></p>
+<p>Your Ticker class should contain:</p>
+<ul>
+<li>Code to make sure it is a singleton.</li>
+<li><code>addObserver</code> and <code>notify</code> methods following the observer design pattern for observables.</li>
+<li>Exactly one call to <code>setTimeout</code>.</li>
+<li>Code to make sure the previous timeout is finished before starting the next Timeout.</li>
+</ul>
+<p>Hints:</p>
+<ul>
+<li>Do not put the <code>setTimeout</code> in a loop.</li>
+<li>Remember the late-binding nature of JS.</li>
+</ul>
+<h4 id="the-page">The Page</h4>
+<p>The page should have a title and four distinct areas. One area for the clock, one for the timer, one for the stopwatch, and one for the countdown.</p>
+<p>Use CSS to make each area separate.</p>
+<p>Hints:</p>
+<ul>
+<li>Semantic HTML elements like <code>&lt;section&gt;</code> and <code>&lt;h2&gt;</code> are approprate for for each part of page!</li>
+</ul>
+<h4 id="clock">Clock</h4>
+<p>In the clock part of the page, there should be an appropriate element to show the current time. </p>
+<p>Create a <code>Clock</code> class, to put all your JS code for managing the <code>Clock</code>. Make sure it has an <code>update</code> method and adds itself an as observer to the <code>Ticker</code> class.</p>
+<p>Every time <code>Ticker</code> notifies the <code>Clock</code>, use JS to update the element in the DOM to show the current time.</p>
+<h4 id="timer">Timer</h4>
+<ul>
+<li>The timer should have two number inputs. One for minutes, and one for seconds. </li>
+<li>There should also be a checkbox, that when checked, causes the timer to run, and when not checked, stops the timer.</li>
+<li>The timer should also be able to show "Timer stopped" when the timer is stopped.</li>
+<li>The timer should show "Time's Up!" when the timer is reaches 0 and hasn't been stopped yet.</li>
+<li>When the timer is running, you should disable the minutes and seconds inputs.</li>
+<li>Create a <code>Timer</code> class similar to the clock class, to hold all of your code for the timer, including manipulating the DOM.</li>
+</ul>
+<h4 id="stopwatch">Stopwatch</h4>
+<ul>
+<li>The stopwatch should have three buttons: Start, Stop, and Reset.</li>
+<li>When the stopwatch start button is clicked, the stopwatch should start.</li>
+<li>When the stopwatch is running, the start button should be disabled.</li>
+<li>When the stop button is clicked, the stop watch should <strong>pause</strong>.</li>
+<li>When the stop watch is <strong>not</strong> running, the stop button should be disabled.</li>
+<li>When the reset button is pressed, the stopwatch should start over from zero.</li>
+<li>The stopwatch should display the elapsed time in h:mm:ss.sss seconds, with hours, minutes, seconds, and .miliseconds.<ul>
+<li>If there's less than 10 minutes or seconds it should show the leading zero.</li>
+<li>If there's less than 100 ms, it should also show the leading zeroes.</li>
+</ul>
+</li>
+</ul>
+<h4 id="countdown">Countdown</h4>
+<ul>
+<li>The countdown timer should have a <code>datetime-local</code> input or a separate <code>date</code> input and <code>time</code> input to allow the user to pick the date and time they want to count down to.</li>
+<li>The countdown timer should show the years, months, days, hours, minutes, and seconds remaining until the date and time the user selected.<ul>
+<li>Example: "0 years 0 months 9 days 21 hours 24 minutes 32 seconds remaining"</li>
+</ul>
+</li>
+<li>If the countdown time has already passed, the countdown timer should show the time since the date and time the user selected.<ul>
+<li>Example: "0 years 0 months 9 days 21 hours 24 minutes 32 seconds ago"</li>
+</ul>
+</li>
+<li>A hidden element should appear when the countdown is over.<ul>
+<li>Make the element appear by changing the CSS styling of the element using JavaScript.</li>
+</ul>
+</li>
+</ul>
+<h3 id="requirements">Requirements</h3>
+<ul>
+<li>Your CSS and HTML must pass validation: <a href="https://validator.w3.org/nu/">https://validator.w3.org/nu/</a></li>
+<li>Your JS, CSS, and HTML must not create any warnings or errors in Firefox Developer Edition.</li>
+<li>Your HTML should use the most appropriate semantic elements.<ul>
+<li>Your countdown should use a <code>datetime-local</code> input, or seperate <code>date</code> and <code>time</code> inputs.</li>
+<li>Your timer should use checkbox or radio buttons to allow pausing and unpausing.</li>
+<li>Inputs should be appropriately labelled with label elements. <a href="">More info</a></li>
+<li>It should be <strong>obvious</strong> what each input does.</li>
+<li>The page should have a title and four distinct sections.</li>
+<li>All CSS should be in a single element in head.</li>
+<li>All JS should be in a single element in head.<ul>
+<li>Your HTML should <strong>not</strong> contain <code>style=</code> or <code>onload=</code> or similar attributes.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Your JS should demonstrate an understanding JavaScript functions, anonymous functions, classes, binding, looping, and basic DOM manipulation.<ul>
+<li>You should use <code>setTimeout</code> <strong>only once</strong>.</li>
+<li>Your JS should modify CSS styles to hide and unhide elements.</li>
+<li>Your JS should modify the text inside elements.</li>
+<li>Your JS should disable/enable elements.</li>
+<li>You should never pass a string to an event handler, <code>setTimeout</code>, or other function that can take both a code string and a function reference.</li>
+<li>Your JS contains a <code>Ticker</code> class that follows the singleton design pattern and the observer design pattern.<ul>
+<li><code>Ticker</code> class should contain <code>addObserver</code> and <code>notify</code> methods, so it can be observable.</li>
+<li>Attempting to instantiate multiple <code>Ticker</code> objects should fail with an error.</li>
+<li>Your Ticker should update the page approximately once per second.</li>
+</ul>
+</li>
+<li>Your JS contain <code>Clock</code>, <code>Timer</code>, <code>Stopwatch</code>, and <code>Countdown</code> classes. These classes are entirely reponsible for managing their part of the application.<ul>
+<li>These four classes get called by <code>Ticker</code> approximately once per second to update the DOM.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Your CSS should make your app aesthetically appealing.<ul>
+<li>It should look nice.</li>
+<li>Every element should be readable.</li>
+<li>It should be clear what every element does.</li>
+<li>It should be <strong>obvious</strong> to anyone how to use all of the functions of the app.</li>
+<li>Each part of the app should be separated, visually distinct, and titled.</li>
+<li>Your CSS must make sure the element with the message about the countdown being over is hidden until the countdown is over.</li>
+</ul>
+</li>
+</ul>
+<h3 id="restrictions">Restrictions</h3>
+<p>Violation of the restrictions will result a mark of zero.</p>
+<ul>
+<li>You <strong>must not</strong> use <code>setInterval</code> or <code>requestAnimationFrame</code>.<ul>
+<li>You may use <code>setTimeout</code> only once at a time.<ul>
+<li>You can call <code>setTimeout</code> multiple times.</li>
+<li>However, you must wait until the previous timeout finishes, before calling it again.</li>
+<li>You must <strong>not</strong> have multiple timeouts running at once.</li>
+<li>It must be <strong>obvious</strong> in your code that multiple timeouts are never running at once.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>All JS and CSS are included in the single HTML file, <code>clock.html</code></li>
+<li>Using of any frontend frameworks, CSS libraries, JS libraries or frameworks is forbidden. </li>
+<li>You must write plain JS, CSS and HTML. </li>
+<li>You must not use JS libraries, frameworks, preprocessors, or transpilers.</li>
+<li>You must not use CSS libraries, frameworks, preprocessors or transpilers.</li>
+<li>You must not use frontend frameworks, HTML frameworks, preprocessors or transpilers. </li>
+<li>JS must <code>'use strict';</code> at the top, or it must be an ES Module.</li>
+<li>Nothing may be loaded by JS/HTML/CSS. (Network pane should only have one "GET clock.html" in it.)</li>
+<li>Must not contain any <code>&lt;div&gt;</code> or <code>&lt;span&gt;</code> elements.</li>
+</ul>
+<h3 id="submission-instructions">Submission Instructions</h3>
+<p>Upload your entire app as a single HTML file directly to eClass.</p>
+<h3 id="hints">Hints</h3>
+<p>For the countdown timer you can use an algorithm like this:</p>
+<p>Imagine you have two datetimes a, and b. and a is less than b. Then we want to compute c = b - a</p>
+<ol>
+<li>c's seconds = b's seconds - a's seconds</li>
+<li>if c's seconds &lt; 0, then borrow one minute from b, and increase c's seconds += 60</li>
+<li>c's minutes = b's minutes - a's minutes</li>
+<li>if c's minutes &lt; 0, then borrow one hour from b, and increase c's minutes += 60</li>
+<li>and so on...</li>
+</ol>
+<p>The tricky one is the days, where you need to calculate how many days you borrowed:</p>
+<ol>
+<li>c's days = b's days - a's days</li>
+<li>if c's days &lt; 0, then borrow one month from b and increase c's days += X where X = the # of days between the original value of b and the value of b after you borrowed a month</li>
+</ol>
+    <footer>
+      <p>Published: <time datetime="2024-07-17T00:00:00-06:00">
+        Wed, 17 Jul 2024 at 00:00 MDT
+      </time></p>
+        <address>
+          By             <a href="../author/hazel-victoria-campbell.html">Hazel Victoria Campbell</a>
+        </address>
+        <p>
+          Category: <a href="../category/labsignments.html">labsignments</a>
+        </p>
+        <p>
+          Tags:
+            <a href="../tag/javascript.html">javascript</a>
+            <a href="../tag/webapp.html">webapp <!-- @LT-IGNORE:MORFOLOGIK_RULE_EN_CA@ --></a>
+        </p>
+    </footer>
+  </article>
+    </main>
+    <footer>
+      <address>
+        Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
+        which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+      </address>
+    </footer>
+  </body>
+</html>
